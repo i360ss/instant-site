@@ -19,7 +19,6 @@ $raw_request_uri = $_SERVER['REQUEST_URI'];
 $clean_request_uri = strtok($raw_request_uri, '?');
 $path = filter_var($clean_request_uri, FILTER_SANITIZE_URL);
 $segment = explode('/', $path);
-$version = isset($segment[2]) ? $segment[2] : '';
 
 
 // BASE URL
@@ -36,12 +35,12 @@ define('BASE_URL', $base_url.'/');
 $_GLOBALS['data'] = [];
 if(isset($route[$path])){
   $data = $route[$path];
-  $view_file = $version.'/'.$data['view'];
-  $data['version'] = $version;
+  $data['segment'] = $segment;
+  $view_file = $data['view'];
 
   // Load Controller and method
   if(isset($route[$path]['action'])){
-    if(is_array($route[$path]['action']) && is_object($route[$path]['action'][0])){
+    if(is_array($route[$path]['action']) && class_exists($route[$path]['action'][0])){
       $callback = [new $route[$path]['action'][0], isset($route[$path]['action'][1]) ? $route[$path]['action'][1] : 'index'];
       call_user_func($callback);
     } elseif(is_callable($route[$path]['action'])){
@@ -76,6 +75,7 @@ function comp($load_this_component, $comp_data=[]) {
   return $content;
 }
 
+
 // Echo Component
 function _comp($load_this_component, $comp_data=[]) {
   echo comp($load_this_component, $comp_data);
@@ -88,6 +88,8 @@ function _comp($load_this_component, $comp_data=[]) {
  * @param array $partial_data Partial specific data
  */
 function partial($load_this_partial, $partial_data=[]){
+  global $data;
+  extract($data);
   extract($partial_data);
   include '../view/partials/'.$load_this_partial.'.phtml';
 }

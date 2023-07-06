@@ -8,7 +8,8 @@ class Welcome {
   }
 
   function test() {
-    echo '789';
+    global $data;
+    $data['name'] = 'Max Smith';
   }
 
 }

@@ -4,7 +4,7 @@ class Welcome {
 
   function index(){
     global $data;
-    $data['name'] = 'Shakir';
+    $data['name'] = 'John Doe';
   }
 
   function test() {

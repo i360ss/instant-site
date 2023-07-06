@@ -41,8 +41,12 @@ if(isset($route[$path])){
 
   // Load Controller and method
   if(isset($route[$path]['action'])){
-    $callback = [new $route[$path]['action'][0], isset($route[$path]['action'][1]) ? $route[$path]['action'][1] : 'index'];
-    call_user_func($callback);
+    if(is_array($route[$path]['action']) && is_object($route[$path]['action'][0])){
+      $callback = [new $route[$path]['action'][0], isset($route[$path]['action'][1]) ? $route[$path]['action'][1] : 'index'];
+      call_user_func($callback);
+    } elseif(is_callable($route[$path]['action'])){
+      call_user_func($route[$path]['action']);
+    }
   }
 } else {
   $view_file = '404';
@@ -50,17 +54,42 @@ if(isset($route[$path])){
 
 
 // Current Page
-$data['view'] = '../pages/'.$view_file.'.phtml';
+$data['view'] = '../view/pages/'.$view_file.'.phtml';
 if(!file_exists($data['view'])){
-  $data['view'] = '../pages/404.phtml';
+  $data['view'] = '../view/pages/404.phtml';
 }
 
 
-// Load Component
-function comp($comp) {
+/**
+ * Load Component
+ * @param string $load_this_component Component name to load
+ * @param array $comp_data Component specific data to bind with the component
+ */
+function comp($load_this_component, $comp_data=[]) {
   global $data;
-  extract($data);
-  require '../components/'.$comp.'.phtml';
+  $component_data = array_merge($comp_data, $data);
+  extract($component_data);
+  ob_start();
+  include '../view/components/'.$load_this_component.'.phtml';
+  $content = ob_get_clean();
+
+  return $content;
+}
+
+// Echo Component
+function _comp($load_this_component, $comp_data=[]) {
+  echo comp($load_this_component, $comp_data);
+}
+
+
+/**
+ * Include a partial
+ * @param string $load_this_partial Partial name
+ * @param array $partial_data Partial specific data
+ */
+function partial($load_this_partial, $partial_data=[]){
+  extract($partial_data);
+  include '../view/partials/'.$load_this_partial.'.phtml';
 }
 
 

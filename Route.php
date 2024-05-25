@@ -5,10 +5,16 @@ if(!defined('APP_INIT')){
 
 // Page Router
 $route = [
-  '/' => [
-    'view' => 'welcome',
-    'title' => 'Welcome',
-    'age' => 26,
-    'action' => [Welcome::class, 'test'],
+  'GET' => [
+    '/' => [
+      'view' => 'welcome',
+      'title' => 'Welcome',
+      'action' => [Welcome::class, 'test'],
+    ],
+    '/contact' => [
+      'view' => 'contact',
+      'title' => 'Contact Us',
+      'intro_text' => 'Get in touch with us!'
+    ]
   ]
 ];

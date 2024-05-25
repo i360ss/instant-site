@@ -1,6 +1,6 @@
 <?php
 define('APP_INIT', true);
-require __DIR__.'/../app.php';
+require __DIR__.'/../app_start.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,9 +18,8 @@ require __DIR__.'/../app.php';
     </div>
     <nav>
       <ul>
-        <?php foreach ($route as $key => $value) : ?>
-          <li><a href="<?=$key?>"><?=$value['title']?></a></li>
-        <?php endforeach; ?>
+        <li><a href="/">Home</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -33,3 +32,4 @@ require __DIR__.'/../app.php';
 <script src="<?=BASE_URL?>assets/js/app.js"></script>
 </body>
 </html>
+<?php require __DIR__.'/../app_end.php';?>

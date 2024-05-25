@@ -14,7 +14,7 @@ require __DIR__.'/../app_start.php';
 <body>
   <header>
     <div class="logo">
-      <a href="/">OZZ LOGO</a>
+      <a href="/">LOGO</a>
     </div>
     <nav>
       <ul>

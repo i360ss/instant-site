@@ -8,8 +8,7 @@ $route = [
   'GET' => [
     '/' => [
       'view' => 'welcome',
-      'title' => 'Welcome',
-      'action' => [Welcome::class, 'test'],
+      'title' => 'Welcome'
     ],
     '/contact' => [
       'view' => 'contact',

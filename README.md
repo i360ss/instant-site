@@ -1,14 +1,22 @@
-# Instant Site
-Simplest instant website creator
+# Instant Site - A Simple PHP Boilerplate
 
-Note: Suitable only for small and simple websites
+Instant Site is a minimalist PHP boilerplate designed to get you started quickly with web development. It features a basic routing mechanism, a controller-view structure, and an easy-to-use middleware system. This is ideal for those who need a simple and lightweight solution for small projects.
 
-You can simply load a controller and view for each routes. Also the layout can be seperated as components.
-[ $data ] will contain all the data assigned to current route
-[ $data ] also can be updated with more content from a controller
+## Features
 
+- **Basic Routing Mechanism**: Define routes easily and handle HTTP requests.
+- **Controller-View Structure**: Organize your application with a clear separation of logic and presentation.
+- **Simple Middleware**: Add middleware to routes for pre-processing requests.
+- **Component-Based Views**: Break down your views into reusable components.
+- **Global $data Variable**: Effortlessly share data between controllers and views.
 
-## Start Local development server
-```
-php ozz serve
-```
+## Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/i360ss/instant-site.git
+
+2. Start the local development server
+   ```sh
+   cd instant-site
+   php -S localhost:8000

@@ -18,5 +18,5 @@ Instant Site is a minimalist PHP boilerplate designed to get you started quickly
 
 2. Start the local development server
    ```sh
-   cd instant-site
+   cd instant-site/public_html
    php -S localhost:8000
